@@ -1,6 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import '../styles/list.css'
 
+function Difference(props) {
+  let name = 'increase';
+  if(props.currentValue < props.previousValue) {
+    name = 'decrease';
+  }
+  return <span className={name}>{(props.currentValue - props.previousValue).toFixed(2)}</span>
+}
+
 class ListItems extends Component {
   render() {
     const dataArr = Object.keys(this.props.data);
@@ -8,7 +16,7 @@ class ListItems extends Component {
       <li className='list__item' key={this.props.data[elem].CharCode}>
         <span>{this.props.data[elem].CharCode}</span>
         <span>{this.props.data[elem].Value}</span>
-        <span>{(this.props.data[elem].Value - this.props.data[elem].Previous).toFixed(2)}</span>
+        <Difference currentValue={this.props.data[elem].Value} previousValue={this.props.data[elem].Previous}/>
       </li>
     ));
   }
@@ -21,8 +29,25 @@ class List extends Component {
 }
 
 class ListContainer extends Component {
+  state = {
+    data: {},
+  }
+
+  componentDidMount() {
+    this.fetchData()
+  }
+
+  fetchData() {
+    const BASE_PATH = 'https://www.cbr-xml-daily.ru/daily_json.js';
+
+    fetch(BASE_PATH)
+      .then(res => res.json())
+      .then(result => this.setState({data: result.Valute}))
+      .catch(error => error);
+  }
+
   render() {
-    return <main><List data={this.props.data}/></main>
+    return <main className='main'><List data={this.state.data}/></main>
   }
 }
 

@@ -1,15 +1,35 @@
 .list {
-    position: relative;
-    min-height: 100%;
     width: 50%;
-    padding-bottom: 70px;
+    margin: 10px auto;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    padding-bottom: 100px;
 }
 
 .list__item {
     list-style: none;
     display: flex;
     justify-content: space-around;
+}
+
+.increase::after {
+    content: '';
+    background-image: url(../images/up.png);
+}
+
+.increase::after,
+.decrease::after {
+    content: '';
+    width: 15px;
+    height: 15px;
+    margin-left: 10px;
+    display: inline-block;
+    background-size: contain;
+}
+
+
+.decrease::after {
+    content: '';
+    background-image: url(../images/down.png);
 }

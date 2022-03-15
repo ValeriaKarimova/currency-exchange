@@ -12,6 +12,17 @@ code {
     monospace;
 }
 
+.header {
+  background-color: rgb(128, 128, 128);
+  padding: 15px 0;
+}
+
+.main {
+  position: relative;
+  height: calc(100vh - 50px);
+  padding-bottom: 70px;
+}
+
 .title {
   text-align: center;
 }
