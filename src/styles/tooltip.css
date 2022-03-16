@@ -1,0 +1,17 @@
+  .targetElement {
+    cursor: pointer;
+  }
+  
+  .tooltip {
+    position: absolute;
+    left: 20%;
+    padding: 10px;
+    border-radius: 3px;
+    overflow: hidden;
+    background-color: #EDEDED;
+    width: 150px;
+    font-size: 12px;
+    box-sizing: border-box;
+    box-shadow: 1px 1px 10px #777;
+    z-index: 9999;
+  }

@@ -1,35 +1,40 @@
 .list {
-    width: 50%;
-    margin: 10px auto;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding-bottom: 100px;
+  width: 50%;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 100px;
 }
 
 .list__item {
-    list-style: none;
-    display: flex;
-    justify-content: space-around;
+  position: relative;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
 }
 
 .increase::after {
-    content: '';
-    background-image: url(../images/up.png);
+  content: '';
+  background-image: url(../images/up.png);
 }
 
 .increase::after,
 .decrease::after {
-    content: '';
-    width: 15px;
-    height: 15px;
-    margin-left: 10px;
-    display: inline-block;
-    background-size: contain;
+  content: '';
+  width: 15px;
+  height: 15px;
+  margin-left: 10px;
+  display: inline-block;
+  background-size: contain;
 }
 
-
 .decrease::after {
-    content: '';
-    background-image: url(../images/down.png);
+  content: '';
+  background-image: url(../images/down.png);
+}
+
+.code:hover {
+  font-weight: 800;
+  color: blue;
 }

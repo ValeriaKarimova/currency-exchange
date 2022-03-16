@@ -1,22 +1,36 @@
 import React, { Component, Fragment } from 'react';
-import '../styles/list.css'
+import '../styles/list.css';
+import Tooltip from './tooltip';
 
 function Difference(props) {
   let name = 'increase';
-  if(props.currentValue < props.previousValue) {
+  if (props.currentValue < props.previousValue) {
     name = 'decrease';
   }
-  return <span className={name}>{(props.currentValue - props.previousValue).toFixed(2)}</span>
+  return (
+    <span className={name}>
+      {(
+        ((props.currentValue - props.previousValue) / props.previousValue) *
+        100
+      ).toFixed(2) + '%'}
+    </span>
+  );
 }
 
 class ListItems extends Component {
   render() {
-    const dataArr = Object.keys(this.props.data);
+    const { data } = this.props;
+    const dataArr = Object.keys(data);
     return dataArr.map((elem) => (
-      <li className='list__item' key={this.props.data[elem].CharCode}>
-        <span>{this.props.data[elem].CharCode}</span>
-        <span>{this.props.data[elem].Value}</span>
-        <Difference currentValue={this.props.data[elem].Value} previousValue={this.props.data[elem].Previous}/>
+      <li className="list__item" key={data[elem].CharCode}>
+        <Tooltip content={data[elem].Name}>
+          <span className="code">{data[elem].CharCode}</span>
+        </Tooltip>
+        <span>{Math.round(data[elem].Value).toFixed(2)}</span>
+        <Difference
+          currentValue={data[elem].Value}
+          previousValue={data[elem].Previous}
+        />
       </li>
     ));
   }
@@ -24,30 +38,38 @@ class ListItems extends Component {
 
 class List extends Component {
   render() {
-    return <ul className='list'><ListItems data={this.props.data} /></ul>
+    return (
+      <ul className="list">
+        <ListItems data={this.props.data} />
+      </ul>
+    );
   }
 }
 
 class ListContainer extends Component {
   state = {
     data: {},
-  }
+  };
 
   componentDidMount() {
-    this.fetchData()
+    this.fetchData();
   }
 
   fetchData() {
     const BASE_PATH = 'https://www.cbr-xml-daily.ru/daily_json.js';
 
     fetch(BASE_PATH)
-      .then(res => res.json())
-      .then(result => this.setState({data: result.Valute}))
-      .catch(error => error);
+      .then((res) => res.json())
+      .then((result) => this.setState({ data: result.Valute }))
+      .catch((error) => error);
   }
 
   render() {
-    return <main className='main'><List data={this.state.data}/></main>
+    return (
+      <main className="main">
+        <List data={this.state.data} />
+      </main>
+    );
   }
 }
 
