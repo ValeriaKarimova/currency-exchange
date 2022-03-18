@@ -1,1 +1,1 @@
-Deploy link: currency-data.netlify.app
+Deploy link: https://currency-data.netlify.app/
